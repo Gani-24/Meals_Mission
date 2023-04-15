@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "666229050287",
+    "project_id": "mealsmission-822be",
+    "storage_bucket": "mealsmission-822be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666229050287:android:85f632de937c9db6fd3d5a",
+        "android_client_info": {
+          "package_name": "com.example.meals_mission"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666229050287-hbda1p5sqhd3ta7605bkjk3retr2mirb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQ6RIVzKdrlWrVVVvPsYdNvSXPrfR-RN0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666229050287-hbda1p5sqhd3ta7605bkjk3retr2mirb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
