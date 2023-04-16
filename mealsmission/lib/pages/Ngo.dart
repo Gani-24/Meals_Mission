@@ -60,7 +60,7 @@ class _NgoHomeState extends State<NgoHome> {
                           size: 64,
                         ),
                         const SizedBox(height: 16),
-                        const Text('Hunger Statistics'),
+                        const Text('Solve Hunger'),
                       ],
                     ),
                   ),
@@ -77,7 +77,7 @@ class _NgoHomeState extends State<NgoHome> {
                           size: 64,
                         ),
                         const SizedBox(height: 16),
-                        const Text('Food Waste Statistics'),
+                        const Text('Even a Small Step is a Step'),
                       ],
                     ),
                   ),
@@ -94,7 +94,7 @@ class _NgoHomeState extends State<NgoHome> {
                           size: 64,
                         ),
                         const SizedBox(height: 16),
-                        const Text('Food Waste Statistics'),
+                        const Text('Avoid Food Waste'),
                       ],
                     ),
                   ),
@@ -111,7 +111,7 @@ class _NgoHomeState extends State<NgoHome> {
                           size: 64,
                         ),
                         const SizedBox(height: 16),
-                        const Text('Food Waste Statistics'),
+                        const Text('Donate and Save'),
                       ],
                     ),
                   ),
@@ -199,6 +199,7 @@ class _AvailablefoodState extends State<Availablefood> {
                               Text('${data['foodDetails']}'),
                               Text('${data['No of Servings']} servings'),
                               Text(formattedTime),
+                              Text('${data['Phone_Number']}'),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
@@ -304,93 +305,3 @@ class _HistoryState extends State<History> {
     );
   }
 }
-/*return ListView.builder(
-            itemCount: snapshot.data!.docs.length,
-            itemBuilder: (BuildContext context, int index) {
-              DocumentSnapshot document = snapshot.data!.docs[index];
-              Map<String, dynamic> data =
-                  document.data()! as Map<String, dynamic>;
-              if (data['status'] != null && data['status'] != 'available') {
-                return const SizedBox.shrink();
-              }
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            FoodOrderDetails(documentId: document.id)),
-                  );
-                },
-                child: Dismissible(
-                  key: Key(document.id),
-                  direction: DismissDirection.endToStart,
-                  background: Container(
-                    color: Colors.red,
-                    alignment: Alignment.centerRight,
-                    child: const Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                      child: Icon(
-                        Icons.cancel,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                  confirmDismiss: (direction) async {
-                    if (direction == DismissDirection.endToStart) {
-                      return await showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text("Confirm"),
-                            content: const Text(
-                                "Are you sure you want to accept this order?"),
-                            actions: <Widget>[
-                              TextButton(
-                                  onPressed: () =>
-                                      Navigator.of(context).pop(true),
-                                  child: const Text("Accept")),
-                              TextButton(
-                                onPressed: () =>
-                                    Navigator.of(context).pop(false),
-                                child: const Text("Cancel"),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    }
-                    return false;
-                  },
-                  onDismissed: (direction) async {
-                    await FirebaseFirestore.instance
-                        .collection('food orders')
-                        .doc(document.id)
-                        .update({
-                      'status': 'accepted',
-                      'acceptedBy': FirebaseAuth.instance.currentUser!.uid,
-                    });
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Order accepted"),
-                        backgroundColor: Colors.green,
-                      ),
-                    );
-                  },
-                  child: Card(
-                    child: ListTile(
-                      title: Text('${data['foodDetails']}'),
-                      subtitle: Text('${data['No of Servings']} servings'),
-                      trailing: Text(DateFormat('dd MMM kk:mm')
-                          .format(data['timeCooked'].toDate())),
-                    ),
-                  ),
-                ),
-              );
-            },
-          );
-        },
-      ),
-    );
-  }
-}*/
