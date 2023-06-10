@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/services.dart';
 
 class VolHome extends StatefulWidget {
   const VolHome({Key? key}) : super(key: key);
@@ -14,8 +15,8 @@ class VolHome extends StatefulWidget {
 
 class _HomePageState extends State<VolHome> {
   int _currentIndex = 0;
-  List<Widget> _pages = [
-    CreatePostPage(),
+  final List<Widget> _pages = [
+    const CreatePostPage(),
     const HistoryPage(),
   ];
 
@@ -23,7 +24,7 @@ class _HomePageState extends State<VolHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(236, 246, 128, 56),
+        backgroundColor: const Color.fromARGB(236, 246, 128, 56),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 120),
@@ -37,11 +38,11 @@ class _HomePageState extends State<VolHome> {
             height: 200,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: [
+              children: const [
                 SizedBox(
                   width: 200,
                   child: Card(
-                    color: Color.fromARGB(255, 167, 221, 247),
+                    color: Color.fromARGB(228, 244, 199, 115),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -49,8 +50,8 @@ class _HomePageState extends State<VolHome> {
                           Icons.fastfood,
                           size: 64,
                         ),
-                        const SizedBox(height: 16),
-                        const Text('Prevent Hunger'),
+                        SizedBox(height: 16),
+                        Text('Solve Hunger'),
                       ],
                     ),
                   ),
@@ -58,7 +59,7 @@ class _HomePageState extends State<VolHome> {
                 SizedBox(
                   width: 200,
                   child: Card(
-                    color: Color.fromARGB(255, 167, 221, 247),
+                    color: Color.fromARGB(228, 244, 199, 115),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -66,8 +67,8 @@ class _HomePageState extends State<VolHome> {
                           Icons.restaurant,
                           size: 64,
                         ),
-                        const SizedBox(height: 16),
-                        const Text('Donate Food'),
+                        SizedBox(height: 16),
+                        Text('Even a Small Step is a Step'),
                       ],
                     ),
                   ),
@@ -75,7 +76,7 @@ class _HomePageState extends State<VolHome> {
                 SizedBox(
                   width: 200,
                   child: Card(
-                    color: Color.fromARGB(255, 167, 221, 247),
+                    color: Color.fromARGB(228, 244, 199, 115),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -83,8 +84,8 @@ class _HomePageState extends State<VolHome> {
                           Icons.restaurant,
                           size: 64,
                         ),
-                        const SizedBox(height: 16),
-                        const Text('Everyone can be a hero'),
+                        SizedBox(height: 16),
+                        Text('Avoid Food Waste'),
                       ],
                     ),
                   ),
@@ -92,7 +93,7 @@ class _HomePageState extends State<VolHome> {
                 SizedBox(
                   width: 200,
                   child: Card(
-                    color: Color.fromARGB(255, 167, 221, 247),
+                    color: Color.fromARGB(228, 244, 199, 115),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -100,8 +101,8 @@ class _HomePageState extends State<VolHome> {
                           Icons.restaurant,
                           size: 64,
                         ),
-                        const SizedBox(height: 16),
-                        const Text('Avoid Food Waste'),
+                        SizedBox(height: 16),
+                        Text('Donate and Save'),
                       ],
                     ),
                   ),
@@ -115,7 +116,7 @@ class _HomePageState extends State<VolHome> {
         ],
       ),
       bottomNavigationBar: SalomonBottomBar(
-        backgroundColor: Color.fromARGB(240, 238, 134, 60),
+        backgroundColor: const Color.fromARGB(240, 238, 134, 60),
         onTap: (int index) {
           setState(() {
             _currentIndex = index;
@@ -125,13 +126,13 @@ class _HomePageState extends State<VolHome> {
         items: [
           SalomonBottomBarItem(
             icon: const Icon(Icons.add_box_outlined),
-            title: const Text('Create Food Post'),
-            selectedColor: Color.fromARGB(255, 166, 6, 194),
+            title: const Text('Donate Food Page'),
+            selectedColor: Color.fromARGB(255, 5, 108, 31),
           ),
           SalomonBottomBarItem(
             icon: const Icon(Icons.history),
             title: const Text('History'),
-            selectedColor: Color.fromARGB(255, 166, 6, 194),
+            selectedColor: Color.fromARGB(255, 5, 108, 31),
           ),
         ],
       ),
@@ -140,6 +141,8 @@ class _HomePageState extends State<VolHome> {
 }
 
 class CreatePostPage extends StatefulWidget {
+  const CreatePostPage({Key? key}) : super(key: key);
+
   @override
   _CreatePostPageState createState() => _CreatePostPageState();
 }
@@ -161,38 +164,91 @@ class _CreatePostPageState extends State<CreatePostPage> {
         'Phone_Number': int.tryParse(_number.text),
         'user': FirebaseAuth.instance.currentUser!.uid,
       });
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Post Added successfully!'),
         backgroundColor: Colors.green,
       ));
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('Error creating post: $e'),
-        backgroundColor: Color.fromARGB(255, 237, 77, 66),
+        backgroundColor: const Color.fromARGB(255, 237, 77, 66),
       ));
     }
+  }
+
+  void resetFields() {
+    _foodDetails.clear();
+    _timeCooked = DateTime.now();
+    _number.clear();
+    _people.clear();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 249, 194, 164),
+      backgroundColor: Color.fromARGB(255, 254, 189, 139),
       body: FutureBuilder(
         future: _firebaseInit,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             return Form(
                 key: _formKey,
-                child: ListView(padding: EdgeInsets.all(16), children: [
+                child: ListView(padding: const EdgeInsets.all(16), children: [
                   TextFormField(
                     controller: _foodDetails,
                     decoration: InputDecoration(
-                      hintText: 'Food Details',
+                      labelText: 'Food Details',
+                      hintText: 'Enter food details here',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      fillColor: Colors.grey[200],
+                      filled: true,
+                      prefixIcon: Icon(Icons.fastfood),
+                      suffixIcon: IconButton(
+                        icon: Icon(Icons.clear),
+                        onPressed: () {
+                          _foodDetails.clear();
+                        },
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(color: Colors.blue),
+                      ),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   TextFormField(
-                    decoration: InputDecoration(labelText: 'Time Cooked'),
+                    decoration: InputDecoration(
+                      labelText: 'Time Cooked',
+                      hintText: 'Select the time cooked',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      prefixIcon: Icon(Icons.access_time),
+                      suffixIcon: IconButton(
+                        icon: Icon(Icons.clear),
+                        onPressed: () {
+                          setState(() {
+                            _timeCooked = DateTime(0);
+                          });
+                        },
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(color: Colors.blue),
+                      ),
+                    ),
                     validator: (value) {
                       if (value?.isEmpty ?? true) {
                         return 'Please enter the time the food was cooked';
@@ -219,34 +275,103 @@ class _CreatePostPageState extends State<CreatePostPage> {
                       }
                     },
                     controller: TextEditingController(
-                        text: '${_timeCooked.toString()}'),
+                      text: _timeCooked?.toString(),
+                    ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   TextFormField(
                     controller: _people,
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: InputDecoration(
-                      hintText: 'Number of Servings Available',
+                      labelText: 'Number of Servings Available',
+                      hintText: 'Enter the number of servings',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      prefixIcon: Icon(Icons.people),
+                      suffixIcon: IconButton(
+                        icon: Icon(Icons.clear),
+                        onPressed: () {
+                          _people.clear();
+                        },
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(color: Colors.blue),
+                      ),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   TextFormField(
                     controller: _number,
+                    keyboardType: TextInputType.phone,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      LengthLimitingTextInputFormatter(10),
+                    ],
                     decoration: InputDecoration(
-                      hintText: 'Phonenumber',
+                      labelText: 'Phonenumber',
+                      hintText: 'Enter your phone number',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      filled: true,
+                      fillColor: Colors.grey[200],
+                      prefixIcon: Icon(Icons.phone),
+                      suffixIcon: IconButton(
+                        icon: Icon(Icons.clear),
+                        onPressed: () {
+                          _number.clear();
+                        },
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(color: Colors.blue),
+                      ),
                     ),
                   ),
-                  SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: addFoodPost,
-                    child: Text('Add Post'),
+                  const SizedBox(height: 16),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      addFoodPost();
+                      resetFields();
+                    },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 30, 184, 35),
-                        elevation: 15,
-                        shadowColor: Color.fromARGB(255, 133, 239, 137)),
+                      primary: Colors.green,
+                      onPrimary: Colors.white,
+                      elevation: 8,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 12, horizontal: 16),
+                    ),
+                    icon: Icon(
+                      Icons.add,
+                      size: 24,
+                    ),
+                    label: Text(
+                      'Add Food Post',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ]));
           }
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         },
@@ -256,7 +381,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
 }
 
 class HistoryPage extends StatefulWidget {
-  const HistoryPage({Key? key});
+  const HistoryPage({Key? key}) : super(key: key);
 
   @override
   State<HistoryPage> createState() => _HistoryPageState();
@@ -270,13 +395,14 @@ class _HistoryPageState extends State<HistoryPage> {
     super.initState();
     _queryStream = FirebaseFirestore.instance
         .collection('foodPosts')
-        .where('user', isEqualTo: '${FirebaseAuth.instance.currentUser!.uid}')
+        .where('user', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .snapshots();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 254, 189, 139),
       body: StreamBuilder<QuerySnapshot>(
         stream: _queryStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -287,7 +413,7 @@ class _HistoryPageState extends State<HistoryPage> {
             return const Center(child: CircularProgressIndicator());
           }
           if (snapshot.data == null || snapshot.data!.docs.isEmpty) {
-            return const Text('No Orders found:');
+            return const Text('No Orders found');
           }
           return ListView.builder(
             itemCount: snapshot.data!.docs.length,
@@ -296,40 +422,44 @@ class _HistoryPageState extends State<HistoryPage> {
               final Map<String, dynamic> data =
                   document.data() as Map<String, dynamic>;
               final bool accepted = data['status'] == 'Accepted';
-              final Color cardColor = accepted ? Colors.green : Colors.yellow;
+              final Color cardColor =
+                  accepted ? Colors.green : Color.fromARGB(255, 238, 224, 103);
               final Timestamp timestamp = data['timeCooked'];
               final DateTime dateTime = timestamp.toDate();
               final String formattedTime =
                   DateFormat('dd MMMM yyyy, hh:mm a').format(dateTime);
-              return Container(
-                decoration: BoxDecoration(
-                  color: cardColor,
+              return Card(
+                color: cardColor,
+                elevation: 8,
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 margin:
                     const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            '${data['foodDetails']}',
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text('${data['No of Servings']} servings'),
-                        ],
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${data['foodDetails']}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
                       ),
-                    ),
-                    Text(formattedTime),
-                  ],
+                      const SizedBox(height: 8),
+                      Text(
+                        '${data['No of Servings']} servings',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        formattedTime,
+                        style: TextStyle(fontSize: 14),
+                      ),
+                    ],
+                  ),
                 ),
               );
             },

@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:mealsmission/pages/loginscreen.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 class NgoHome extends StatefulWidget {
-  NgoHome({Key? key}) : super(key: key);
+  const NgoHome({Key? key}) : super(key: key);
 
   @override
   State<NgoHome> createState() => _NgoHomeState();
@@ -15,8 +14,8 @@ class NgoHome extends StatefulWidget {
 
 class _NgoHomeState extends State<NgoHome> {
   int _currentIndex = 0;
-  List<Widget> _pages = [
-    Availablefood(),
+  final List<Widget> _pages = [
+    const Availablefood(),
     const History(),
   ];
   @override
@@ -24,15 +23,15 @@ class _NgoHomeState extends State<NgoHome> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Color.fromARGB(236, 246, 128, 56),
+        backgroundColor: const Color.fromARGB(236, 246, 128, 56),
         actions: [
           IconButton(
               alignment: Alignment.centerLeft,
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
+                    MaterialPageRoute(builder: (context) => const LoginPage()));
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.logout,
               )),
           Padding(
@@ -47,11 +46,11 @@ class _NgoHomeState extends State<NgoHome> {
             height: 200,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: [
+              children: const [
                 SizedBox(
                   width: 200,
                   child: Card(
-                    color: Color.fromARGB(255, 167, 221, 247),
+                    color: Color.fromARGB(228, 244, 199, 115),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -59,8 +58,8 @@ class _NgoHomeState extends State<NgoHome> {
                           Icons.fastfood,
                           size: 64,
                         ),
-                        const SizedBox(height: 16),
-                        const Text('Solve Hunger'),
+                        SizedBox(height: 16),
+                        Text('Solve Hunger'),
                       ],
                     ),
                   ),
@@ -68,7 +67,7 @@ class _NgoHomeState extends State<NgoHome> {
                 SizedBox(
                   width: 200,
                   child: Card(
-                    color: Color.fromARGB(255, 167, 221, 247),
+                    color: Color.fromARGB(228, 244, 199, 115),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -76,8 +75,8 @@ class _NgoHomeState extends State<NgoHome> {
                           Icons.restaurant,
                           size: 64,
                         ),
-                        const SizedBox(height: 16),
-                        const Text('Even a Small Step is a Step'),
+                        SizedBox(height: 16),
+                        Text('Even a Small Step is a Step'),
                       ],
                     ),
                   ),
@@ -85,7 +84,7 @@ class _NgoHomeState extends State<NgoHome> {
                 SizedBox(
                   width: 200,
                   child: Card(
-                    color: Color.fromARGB(255, 167, 221, 247),
+                    color: Color.fromARGB(228, 244, 199, 115),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -93,8 +92,8 @@ class _NgoHomeState extends State<NgoHome> {
                           Icons.restaurant,
                           size: 64,
                         ),
-                        const SizedBox(height: 16),
-                        const Text('Avoid Food Waste'),
+                        SizedBox(height: 16),
+                        Text('Avoid Food Waste'),
                       ],
                     ),
                   ),
@@ -102,7 +101,7 @@ class _NgoHomeState extends State<NgoHome> {
                 SizedBox(
                   width: 200,
                   child: Card(
-                    color: Color.fromARGB(255, 167, 221, 247),
+                    color: Color.fromARGB(228, 244, 199, 115),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -110,8 +109,8 @@ class _NgoHomeState extends State<NgoHome> {
                           Icons.restaurant,
                           size: 64,
                         ),
-                        const SizedBox(height: 16),
-                        const Text('Donate and Save'),
+                        SizedBox(height: 16),
+                        Text('Donate and Save'),
                       ],
                     ),
                   ),
@@ -125,7 +124,7 @@ class _NgoHomeState extends State<NgoHome> {
         ],
       ),
       bottomNavigationBar: SalomonBottomBar(
-        backgroundColor: Color.fromARGB(240, 238, 134, 60),
+        backgroundColor: const Color.fromARGB(240, 238, 134, 60),
         onTap: (int index) {
           setState(() {
             _currentIndex = index;
@@ -136,12 +135,12 @@ class _NgoHomeState extends State<NgoHome> {
           SalomonBottomBarItem(
             icon: const Icon(Icons.add_box_outlined),
             title: const Text('Available Food'),
-            selectedColor: Color.fromARGB(255, 166, 6, 194),
+            selectedColor: Color.fromARGB(255, 22, 124, 29),
           ),
           SalomonBottomBarItem(
             icon: const Icon(Icons.history),
             title: const Text('History'),
-            selectedColor: Color.fromARGB(255, 166, 6, 194),
+            selectedColor: Color.fromARGB(255, 38, 138, 65),
           ),
         ],
       ),
@@ -157,85 +156,170 @@ class Availablefood extends StatefulWidget {
 }
 
 class _AvailablefoodState extends State<Availablefood> {
-  Set<String> _acceptedFoodIds = {};
+  final Set<String> _acceptedFoodIds = {};
+  Set<String> _acceptedFoodPosts = {};
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(236, 246, 128, 56),
-        title: const Text('Available Food'),
+        title: Text('Available Food'),
         automaticallyImplyLeading: false,
       ),
+      backgroundColor: Color.fromARGB(255, 254, 189, 139),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('foodPosts').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
-            return const Center(
+            return Center(
               child: CircularProgressIndicator(),
             );
           }
-          final availableFoodDocs = snapshot.data!.docs
-              .where((doc) => !_acceptedFoodIds.contains(doc.id))
-              .toList();
-          return ListView(
-            children: availableFoodDocs.map((DocumentSnapshot document) {
-              Map<String, dynamic> data =
+          final availableFoodDocs = snapshot.data!.docs.where((doc) {
+            final data = doc.data() as Map<String, dynamic>;
+            return !_acceptedFoodIds.contains(doc.id) &&
+                !data.containsKey('status');
+          }).toList();
+          return ListView.builder(
+            itemCount: availableFoodDocs.length,
+            itemBuilder: (BuildContext context, int index) {
+              final DocumentSnapshot document = availableFoodDocs[index];
+              final Color cardcolor = Color.fromARGB(255, 233, 154, 7);
+              final Map<String, dynamic> data =
                   document.data() as Map<String, dynamic>;
-              Timestamp timestamp = data['timeCooked'];
-              DateTime dateTime = timestamp.toDate();
-              String formattedTime =
+              final Timestamp timestamp = data['timeCooked'];
+              final DateTime dateTime = timestamp.toDate();
+              final String formattedTime =
                   DateFormat('dd MMMM yyyy, hh:mm a').format(dateTime);
               return Card(
+                color: cardcolor,
+                shadowColor: Color.fromARGB(255, 239, 175, 78),
+                elevation: 10,
+                margin: const EdgeInsets.all(8.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
                 child: InkWell(
                   onTap: () {
-                    showModalBottomSheet(
+                    showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return Container(
-                          height: MediaQuery.of(context).size.height * 0.7,
-                          child: Column(
-                            children: [
-                              Text('${data['foodDetails']}'),
-                              Text('${data['No of Servings']} servings'),
-                              Text(formattedTime),
-                              Text('${data['Phone_Number']}'),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  ElevatedButton(
-                                    onPressed: () async {
-                                      setState(() {
-                                        _acceptedFoodIds.add(document.id);
-                                      });
-                                      await FirebaseFirestore.instance
-                                          .collection('foodPosts')
-                                          .doc(document.id)
-                                          .update({
-                                        'status': 'Accepted',
-                                        'acceptedBy': FirebaseAuth
-                                            .instance.currentUser!.uid,
-                                      });
-                                    },
-                                    child: Text('Accept'),
+                        return Dialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                          child: Container(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  '${data['foodDetails']}',
+                                  style: TextStyle(
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                ],
-                              ),
-                            ],
+                                ),
+                                SizedBox(height: 16),
+                                Text(
+                                  '${data['No of Servings']} servings',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  formattedTime,
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  '${data['Phone_Number']}',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                SizedBox(height: 16),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color:
+                                                Colors.green.withOpacity(0.5),
+                                            spreadRadius: 5,
+                                            blurRadius: 10,
+                                            offset: Offset(0, 3),
+                                          ),
+                                        ],
+                                      ),
+                                      child: ElevatedButton(
+                                        onPressed: () async {
+                                          setState(() {
+                                            _acceptedFoodIds.add(document.id);
+                                          });
+                                          await FirebaseFirestore.instance
+                                              .collection('foodPosts')
+                                              .doc(document.id)
+                                              .update({
+                                            'status': 'Accepted',
+                                            'acceptedBy': FirebaseAuth
+                                                .instance.currentUser!.uid,
+                                          });
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(const SnackBar(
+                                            content: Text(
+                                                'Food Accepted successfully!'),
+                                            backgroundColor: Colors.green,
+                                          ));
+                                          Navigator.pop(context);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Colors.green,
+                                          onPrimary: Colors.white,
+                                        ),
+                                        child: const Text(
+                                          'Accept',
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },
                     );
                   },
-                  child: ListTile(
-                    title: Text('${data['foodDetails']}'),
-                    subtitle: Text('${data['No of Servings']} servings'),
-                    trailing: Text(formattedTime),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${data['foodDetails']}',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          '${data['No of Servings']} servings',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          formattedTime,
+                          style: TextStyle(fontSize: 14),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
-            }).toList(),
+            },
           );
         },
       ),
@@ -255,51 +339,91 @@ class _HistoryState extends State<History> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(236, 246, 128, 56),
+        backgroundColor: const Color.fromARGB(236, 246, 128, 56),
         title: const Text('History'),
         automaticallyImplyLeading: false,
       ),
+      backgroundColor: Color.fromARGB(255, 254, 189, 139),
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('foodPosts').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
-            return const Center(
+            return Center(
               child: CircularProgressIndicator(),
             );
           }
-          List<Widget> acceptedFoodPosts =
-              snapshot.data!.docs.map((DocumentSnapshot document) {
-            Map<String, dynamic> data = document.data() as Map<String, dynamic>;
-            if (data['acceptedBy'] == FirebaseAuth.instance.currentUser!.uid) {
-              Timestamp timestamp = data['timeCooked'];
-              DateTime dateTime = timestamp.toDate();
-              String formattedTime =
-                  DateFormat('dd MMMM yyyy, hh:mm a').format(dateTime);
-              return Card(
-                color: Colors.green[100],
-                child: ListTile(
-                  title: Text('${data['foodDetails']}'),
-                  subtitle: Text('${data['No of Servings']} servings'),
-                  trailing: Text(formattedTime),
-                ),
-              );
-            } else {
-              return const SizedBox.shrink();
-            }
+          final acceptedFoodPosts = snapshot.data!.docs.where((doc) {
+            final data = doc.data() as Map<String, dynamic>;
+            return data.containsKey('status') &&
+                data['acceptedBy'] == FirebaseAuth.instance.currentUser!.uid;
           }).toList();
-          return acceptedFoodPosts.isEmpty
-              ? Center(
-                  child: Text(
+
+          if (acceptedFoodPosts.isEmpty) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.sentiment_dissatisfied,
+                    size: 80,
+                    color: Colors.black,
+                  ),
+                  SizedBox(height: 16),
+                  Text(
                     'You have not accepted any food yet!',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
+                      color: Colors.black,
                     ),
                   ),
-                )
-              : ListView(
-                  children: acceptedFoodPosts,
-                );
+                ],
+              ),
+            );
+          }
+
+          return ListView.builder(
+            itemCount: acceptedFoodPosts.length,
+            itemBuilder: (BuildContext context, int index) {
+              final document = acceptedFoodPosts[index];
+              final Color cardcolor = Color.fromRGBO(43, 191, 20, 1);
+              final data = document.data() as Map<String, dynamic>;
+              final timestamp = data['timeCooked'] as Timestamp;
+              final dateTime = timestamp.toDate();
+              final formattedTime =
+                  DateFormat('dd MMMM yyyy, hh:mm a').format(dateTime);
+              return Card(
+                color: cardcolor,
+                shadowColor: Color.fromARGB(255, 13, 244, 20).withOpacity(0.5),
+                elevation: 20,
+                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                child: ListTile(
+                  contentPadding: EdgeInsets.all(16),
+                  title: Text(
+                    data['foodDetails'],
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  subtitle: Text(
+                    '${data['No of Servings']} servings',
+                    style: TextStyle(
+                      color: const Color.fromARGB(255, 28, 27, 27),
+                      fontSize: 14,
+                    ),
+                  ),
+                  trailing: Text(
+                    formattedTime,
+                    style: TextStyle(
+                      color: const Color.fromARGB(255, 23, 22, 22),
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
         },
       ),
     );

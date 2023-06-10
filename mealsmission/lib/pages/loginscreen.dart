@@ -5,11 +5,10 @@ import 'package:mealsmission/pages/registerscreen.dart';
 import 'package:mealsmission/pages/Volunteer.dart';
 import 'package:mealsmission/pages/Ngo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key? key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -38,12 +37,12 @@ class _LoginPageState extends State<LoginPage> {
       if (role == 'NGO') {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => NgoHome()),
+          MaterialPageRoute(builder: (context) => const NgoHome()),
         );
       } else if (role == 'Volunteer') {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => VolHome()),
+          MaterialPageRoute(builder: (context) => const VolHome()),
         );
       }
     } on FirebaseAuthException catch (e) {
@@ -52,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
           _errorMessage = 'No user found for that email.';
         });
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('No user found for that email'),
             backgroundColor: Colors.red,
           ),
@@ -62,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
           _errorMessage = 'Wrong password provided for that user.';
         });
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Incorrect Password'),
             backgroundColor: Colors.red,
           ),
@@ -74,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 235, 102, 13),
+      backgroundColor: const Color.fromARGB(255, 235, 102, 13),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -83,13 +82,13 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(height: 150),
 
               Container(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child: Image.asset('lib/images/mealsmission.png')),
 
               const SizedBox(height: 30),
 
               // welcome back, you've been missed!
-              Text(
+              const Text(
                 'Welcome, You are on the Right Track!',
                 style: TextStyle(
                   color: Color.fromARGB(255, 81, 77, 77),
@@ -133,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Not a member?',
                     style: TextStyle(color: Color.fromARGB(255, 35, 34, 34)),
                   ),
@@ -142,13 +141,13 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => RegistrationPage()),
+                            builder: (context) => const RegistrationPage()),
                       );
                     },
-                    child: Row(
+                    child: const Row(
                       children: [
-                        const SizedBox(width: 4),
-                        const Text('Register Now',
+                        SizedBox(width: 4),
+                        Text('Register Now',
                             style: TextStyle(
                               color: Color.fromARGB(255, 7, 79, 248),
                               fontWeight: FontWeight.bold,

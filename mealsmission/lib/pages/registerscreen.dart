@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:mealsmission/components/button.dart';
 import 'package:mealsmission/components/regbutton.dart';
 import 'package:mealsmission/components/textfield.dart';
-import 'package:mealsmission/components/regbutton.dart';
 import 'package:mealsmission/pages/loginscreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 
 class RegistrationPage extends StatefulWidget {
-  RegistrationPage({Key? key}) : super(key: key);
+  const RegistrationPage({Key? key}) : super(key: key);
   @override
   _RegistrationPageState createState() => _RegistrationPageState();
 }
@@ -34,7 +32,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     final String password = passwordController.text.trim();
     if (!EmailValidator.validate(email)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Please enter a valid email address'),
           backgroundColor: Colors.red,
         ),
@@ -43,7 +41,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     }
     if (password != confirmPasswordController.text.trim()) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Password Do not match'),
           backgroundColor: Colors.red,
         ),
@@ -70,7 +68,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           _errorMessage = 'The password provided is too weak.';
         });
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('The password provided is too weak.'),
             backgroundColor: Colors.red,
           ),
@@ -80,7 +78,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
           _errorMessage = 'The account already exists for that email.';
         });
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Account Already Exists for that email.'),
             backgroundColor: Colors.red,
           ),
@@ -91,7 +89,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         _errorMessage = 'Failed to create account. Please try again later.';
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('An error occurred. Please try again.'),
           backgroundColor: Colors.red,
         ),
@@ -102,7 +100,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 235, 102, 13),
+      backgroundColor: const Color.fromARGB(255, 235, 102, 13),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -112,7 +110,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
               // logo
               Container(
-                  padding: EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(10),
                   child: Image.asset('lib/images/mealsmission.png')),
 
               const SizedBox(height: 30),
@@ -123,7 +121,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 child: Column(
                   children: [
                     // welcome message
-                    Text(
+                    const Text(
                       'Join our mission to create a better world!',
                       style: TextStyle(
                         color: Color.fromARGB(255, 81, 77, 77),
@@ -169,8 +167,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
 
                     const SizedBox(height: 25),
-                    Text('Select your role:'),
-                    SizedBox(height: 8),
+                    const Text('Select your role:'),
+                    const SizedBox(height: 8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -184,8 +182,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             color: _userRole == 'NGO'
                                 ? Colors.green
                                 : Colors.white,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Text('NGO'),
                             ),
                           ),
@@ -200,8 +198,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             color: _userRole == 'Volunteer'
                                 ? Colors.green
                                 : Colors.white,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            child: const Padding(
+                              padding: EdgeInsets.all(8.0),
                               child: Text('Volunteer'),
                             ),
                           ),
@@ -222,7 +220,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Already a member?',
                     style: TextStyle(color: Color.fromARGB(255, 35, 34, 34)),
                   ),
@@ -230,13 +228,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        MaterialPageRoute(builder: (context) => const LoginPage()),
                       );
                     },
-                    child: Row(
+                    child: const Row(
                       children: [
-                        const SizedBox(width: 4),
-                        const Text('Sign in',
+                        SizedBox(width: 4),
+                        Text('Sign in',
                             style: TextStyle(
                               color: Color.fromARGB(255, 7, 79, 248),
                               fontWeight: FontWeight.bold,
