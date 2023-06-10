@@ -22,15 +22,14 @@ waste and promote food security in local communities. Through the app, donors ca
 - accept the food
 - Track the History of the Accepted food
 
-## What I could have done if more time was there
-1. Live map location tracking: With more time, I could have added live map location tracking for NGOs to track the food from the volunteers in real-time. This feature would have provided a more accurate and efficient system for tracking food donations.
+## What can be the large scale model of this app
+1. Live map location tracking: We could add live map location tracking for NGOs to track the food from the volunteers in real-time. This feature would have provided a more accurate and efficient system for tracking food donations.
 
-2. Improved UI: With more time, I could have improved the UI by adding more features, such as profile editing and additional options for users to customize their experience. This would have made the app more user-friendly and attractive to potential users.
+2. Improved UI: We could improve the UI, and add more features, such as profile editing and additional options for users to customize their experience. This would have made the app more user-friendly and attractive to potential users.
 
-3. Certificates for Volunteers: With more time, I could have implemented a feature to give certificates to volunteers for their donations. This would have provided a sense of achievement and recognition for the volunteers and encouraged more people to donate their excess food.
+3. Certificates for Volunteers: We could implemented a feature to give certificates to volunteers for their donations. This would have provided a sense of achievement and recognition for the volunteers and encouraged more people to donate their excess food.
 
-4. Leaderboard for most donations: With more time, I could have added a leaderboard to the app to showcase the top volunteers who made the most donations. This would have created a competitive and motivational environment for volunteers to make more donations and help reduce food waste.
+4. Leaderboard for most donations: We could add a leaderboard to the app to showcase the top volunteers who made the most donations. This would have created a competitive and motivational environment for volunteers to make more donations and help reduce food waste.
 
-5. Integration with other services: With more time, I could have integrated the app with other services to improve its functionality. For example, integrating with weather services to warn volunteers about potential weather issues or integrating with local waste management companies to help them dispose of excess food in an environmentally friendly way.
-
+5. Integration with other services: We could integrated the app with other services to improve its functionality. For example, integrating with weather services to warn volunteers about potential weather issues or integrating with local waste management companies to help them dispose of excess food in an environmentally friendly way.
 
